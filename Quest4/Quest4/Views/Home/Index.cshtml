@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="card text-center bg-info m-auto h-auto" style="width: 25rem;">
+    <div class="card-body">
+        <h5 class="card-title">Information</h5>
+        <p class="card-text">this site can only be viewed by authorized users</p>
+        <div class="m-auto bs-tooltip-auto">
+            <a class=" btn bg-light" asp-controller="Account" asp-action="Register">Register</a>
+            <a class=" btn bg-light" asp-controller="Account" asp-action="Login">Login</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Quest4.Models.User>
+
+<script src="~/js/site.js"></script>
+<h1>All Users</h1>
+
+<form method="post" asp-controller="Account">
+    @*<input type="submit" class=" sendsubmit btn lock" asp-action="Block" value="block" />
+        <input type="submit" class="sendsubmit unlock" asp-action="UnBlock" value="UnBlock" />
+        <input type="submit" class="sendsubmit btn delete" asp-action="Delete" value="Delete" />*@
+
+    <input type="image" class=" btn bg-info wh-50-40" src="~/Images/kisspng-clip-art-line-padlock-black-special-olympics-area-password-svg-png-icon-free-download-244221-on-5bc557f1b9eed2.5544420015396597617616.png" asp-action="UnBlock" value="UnBan" />
+    <input type="image" class=" btn bg-warning wh-50-40" src="~/Images/kisspng-clip-art-padlock-line-lock-svg-png-icon-free-download-224-23-online-5b811eff841e82.3145440415351887355412.png" asp-action="Block" value="ban" />
+    <input type="image" class=" btn bg-danger wh-50-40" src="~/Images/dustbin_120823.png" asp-action="Delete" value="Delete" />
+
+
+    <table class="table table-bordered bg-info">
+
+        <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Id</th>
+                <th>Register date</th>
+                <th>Last log date</th>
+                <th>status</th>
+                <th>Select all <input class="bestcheck" id="bestcheck" type="checkbox" /></th>
+            </tr>
+        </thead>
+
+        <tbody id="scrolList">
+            @await Html.PartialAsync("_WriteMoreUsers")
+        </tbody>
+    </table>
+</form>
+
+<button onclick="loadItems()">load Mode</button>
+
+<script>
+    $('div#loading').hide();
+
+    var page = 0;
+    var _inCallback = false;
+    function loadItems() {
+        if (page > -1 && !_inCallback) {
+            _inCallback = true;
+            page++;
+            $('div#loading').show();
+            console.log(page);
+            $.ajax({
+                type: 'GET',
+                url: '/Account/Users/' + page,
+                success: function (data, textstatus) {
+                    if (data != '') {
+                        $("#scrolList").append(data);
+                    }
+                    else {
+                        page = -1;
+                    }
+                    _inCallback = false;
+                    $("div#loading").hide();
+                }
+            });
+        }
+    }
+</script>
+
+

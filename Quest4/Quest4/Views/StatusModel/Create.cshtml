@@ -1,0 +1,25 @@
+﻿
+@model Quest4.Models.StatusModel
+
+<div class="col-12">
+    <div class="simple-login-container card-body w-media mx-auto bg-info" style="width:22rem">
+        <h2>Register</h2>
+        <form method="post" asp-controller="StatusModel" asp-action="Create">
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <div class="form-group">
+                        <label asp-for="Title"></label>
+                        <input class="input-group-text bg-swap input-group" asp-for="Title">
+                        <span asp-validation-for="Title"></span>
+                    </div>
+                </div>
+            </div>
+            <input type="submit"  value="create"/>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

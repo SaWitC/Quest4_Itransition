@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Quest4.Models.User>
+
+@foreach (var item in Model)
+{
+<tr>
+    <td>@item.UserName</td>
+    <td>@item.Email</td>
+    <td>@item.Id</td>
+    <td>@item.RegisterDate</td>
+    <td>@item.LastLog</td>
+    @if (item.LastLog < DateTime.Now.AddMinutes(-1)&&item.StatusId!=1) {<td>Ofline</td>}
+    else if(item.StatusId!=1){<td>Online</td>}
+    else {<td>Baned</td> }   
+    <td><input value="@item.Email" id="test" name="test" class="custom-checkbox checkbox" type="checkbox" /></td>
+</tr>
+}
